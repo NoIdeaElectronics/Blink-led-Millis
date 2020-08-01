@@ -1,0 +1,26 @@
+//pin numbers
+int ledpin = 7;
+
+//variables
+unsigned long currentMillis;
+unsigned long previousTime = 0;
+long printDelay = 1000;
+int ledState = 0;
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(ledpin, OUTPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  currentMillis = millis(); //grab current time
+  if ((currentMillis - previousTime) >= printDelay) {
+    Serial.print("Time: ");  //print time to serial
+    Serial.println(currentMillis); //print current time to serial
+    ledState = !ledState;
+    digitalWrite(ledpin, ledState);
+    previousTime = millis(); //save the current time
+  }
+}
